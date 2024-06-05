@@ -32,5 +32,5 @@ Follow these instructions to get a copy of the project up and running on your lo
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/mwhite-git/custom-cms-portfolio.git
+   git clone https://github.com/mwhite-git/custom-cms.git
    cd custom-cms-portfolio
