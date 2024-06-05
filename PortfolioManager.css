@@ -1,0 +1,42 @@
+  .portfolio-manager form {
+    margin-bottom: 2rem;
+  }
+  
+  .portfolio-manager .portfolio-images {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .portfolio-manager .portfolio-image {
+    max-width: 285px;
+    height: auto;
+    display: block;
+    margin-top: 10px;
+  }
+  
+  .portfolio-manager input[type="text"],
+  .portfolio-manager input[type="url"],
+  .portfolio-manager textarea,
+  .portfolio-manager .ql-container {
+    width: 100%;
+  }
+  
+  .portfolio-manager select {
+    width: 100%;
+  }
+  
+  .portfolio-manager .search-filter {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+  
+  .portfolio-manager .search-filter input,
+  .portfolio-manager .search-filter select {
+    max-width: 200px;
+  }
+
+
+  
+  

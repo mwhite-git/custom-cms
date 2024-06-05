@@ -1,0 +1,97 @@
+/* src/pages/Admin/AdminDashboard.css */
+.admin-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    position: relative;
+  }
+  
+  .sidebar {
+    width: 12rem; /* Adjust the width to 16rem (256px) */
+    padding-top: 4rem; /* Add some padding to offset from the top */
+    overflow-y: auto; /* Ensure sidebar content is scrollable if it overflows */
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    z-index: 1;
+  }
+  
+  .mobile-navbar {
+    width: 100%;
+    position: relative;
+    top: 0;
+    left: 0;
+    z-index: 1;
+  }
+  
+  .admin-navbar ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .admin-navbar li {
+    margin-bottom: 1rem;
+    width: 100%;
+  }
+  
+  .admin-navbar button {
+    width: 100%;
+    text-align: left;
+    padding: 0.5rem 1rem;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+  }
+  
+  .admin-navbar button:hover {
+    background-color: #f0f4f8; /* Light hover background */
+  }
+  
+  .dark .admin-navbar button:hover {
+    background-color: #1f2937; /* Dark hover background */
+  }
+  
+  .admin-navbar button:focus {
+    outline: none;
+  }
+  
+  .main-content {
+    padding: 2rem;
+    flex-grow: 1;
+    min-height: 100vh; /* Ensure it takes up at least the full height of the viewport */
+    margin-left: 14rem; /* Ensure the main content is not covered by the sidebar */
+  }
+  
+  @media (max-width: 1024px) {
+    .sidebar {
+      display: none;
+    }
+  
+    .mobile-navbar {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+    }
+  
+    .admin-navbar ul {
+      flex-direction: row;
+      align-items: center;
+    }
+  
+    .admin-navbar li {
+      margin-bottom: 0;
+    }
+  
+    .main-content {
+      margin-left: 0;
+    }
+  }
+  
