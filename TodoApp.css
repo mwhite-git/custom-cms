@@ -1,0 +1,48 @@
+/* src/pages/Admin/TodoApp.css */
+.todo-app {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .todo-input {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .todo-input input {
+    flex: 1;
+    padding: 10px;
+    font-size: 16px;
+  }
+  
+  .todo-input button {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin-left: 10px;
+  }
+  
+  .todo-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .todo-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .todo-list li.completed span {
+    text-decoration: line-through;
+    color: gray;
+  }
+  
+  .todo-list button {
+    background: none;
+    border: none;
+    color: red;
+    cursor: pointer;
+  }
+  
