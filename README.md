@@ -1,6 +1,6 @@
-# Custom CMS Portfolio
+# Custom CMS
 
-Welcome to the Custom CMS Portfolio project! This repository contains the code for a custom Content Management System (CMS) built to manage a personal portfolio and blog. The CMS is designed to help you showcase your projects and write blog posts easily.
+Welcome to the Custom CMS project! This repository contains the code for a custom Content Management System (CMS) built to manage a personal portfolio and blog. The CMS is designed to help you showcase your projects and write blog posts easily.
 
 ## Features
 
