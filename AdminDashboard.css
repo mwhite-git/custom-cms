@@ -7,9 +7,9 @@
   }
   
   .sidebar {
-    width: 12rem; /* Adjust the width to 16rem (256px) */
-    padding-top: 4rem; /* Add some padding to offset from the top */
-    overflow-y: auto; /* Ensure sidebar content is scrollable if it overflows */
+    width: 12rem; 
+    padding-top: 4rem; 
+    overflow-y: auto; 
     position: fixed;
     top: 0;
     left: 0;
@@ -66,8 +66,8 @@
   .main-content {
     padding: 2rem;
     flex-grow: 1;
-    min-height: 100vh; /* Ensure it takes up at least the full height of the viewport */
-    margin-left: 14rem; /* Ensure the main content is not covered by the sidebar */
+    min-height: 100vh; 
+    margin-left: 14rem; 
   }
   
   @media (max-width: 1024px) {
