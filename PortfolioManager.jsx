@@ -13,7 +13,7 @@ const PortfolioManager = () => {
   const [existingImages, setExistingImages] = useState([]);
   const [displayImageUrl, setDisplayImageUrl] = useState('');
   const [tags, setTags] = useState('');
-  const [technologies, setTechnologies] = useState(''); // New state for technologies
+  const [technologies, setTechnologies] = useState('');
   const [githubLink, setGithubLink] = useState('');
   const [featured, setFeatured] = useState(false);
   const [portfolioEntries, setPortfolioEntries] = useState([]);
@@ -59,7 +59,7 @@ const PortfolioManager = () => {
       imageUrls: mergedImageUrls || [],
       displayImageUrl: displayImageUrl || mergedImageUrls[0] || '',
       tags: tags ? tags.split(',').map(tag => tag.trim()) : [],
-      technologies: technologies ? technologies.split(',').map(tech => tech.trim()) : [], // Split technologies by comma
+      technologies: technologies ? technologies.split(',').map(tech => tech.trim()) : [], 
       githubLink: githubLink || '',
       featured: featured || false,
     };
@@ -73,7 +73,7 @@ const PortfolioManager = () => {
 
     fetchPortfolioEntries();
     resetForm();
-    window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll to the top
+    window.scrollTo({ top: 0, behavior: 'smooth' }); 
   };
 
   const resetForm = () => {
@@ -83,7 +83,7 @@ const PortfolioManager = () => {
     setExistingImages([]);
     setDisplayImageUrl('');
     setTags('');
-    setTechnologies(''); // Reset technologies
+    setTechnologies(''); 
     setGithubLink('');
     setFeatured(false);
   };
@@ -94,11 +94,11 @@ const PortfolioManager = () => {
     setExistingImages(entry.imageUrls || []);
     setDisplayImageUrl(entry.displayImageUrl || '');
     setTags(entry.tags.join(', '));
-    setTechnologies(entry.technologies ? entry.technologies.join(', ') : ''); // Set technologies safely
+    setTechnologies(entry.technologies ? entry.technologies.join(', ') : '');
     setGithubLink(entry.githubLink);
     setFeatured(entry.featured);
     setEditingEntry(entry);
-    window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll to the top
+    window.scrollTo({ top: 0, behavior: 'smooth' }); 
   };
 
   const handleDelete = async (id) => {

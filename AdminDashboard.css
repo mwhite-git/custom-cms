@@ -52,11 +52,11 @@
   }
   
   .admin-navbar button:hover {
-    background-color: #f0f4f8; /* Light hover background */
+    background-color: #f0f4f8; 
   }
   
   .dark .admin-navbar button:hover {
-    background-color: #1f2937; /* Dark hover background */
+    background-color: #1f2937; 
   }
   
   .admin-navbar button:focus {
@@ -78,20 +78,34 @@
     .mobile-navbar {
       display: flex;
       flex-direction: row;
-      justify-content: space-around;
+      justify-content: flex-start; 
+      flex-wrap: wrap;
     }
   
     .admin-navbar ul {
+      display: flex;
       flex-direction: row;
       align-items: center;
+      flex-wrap: wrap;
+      padding: 0;
+      margin: 0;
+      list-style: none; 
     }
   
     .admin-navbar li {
       margin-bottom: 0;
+      flex: 1 0 auto; 
+      text-align: center;
+      padding: 8px;
+    }
+  
+    .admin-navbar button {
+      width: 100%; 
     }
   
     .main-content {
       margin-left: 0;
     }
   }
+  
   

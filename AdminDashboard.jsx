@@ -6,7 +6,7 @@ import { FaProjectDiagram, FaBlog, FaSignOutAlt, FaHome, FaTasks } from 'react-i
 import PortfolioManager from './PortfolioManager';
 import BlogManager from './BlogManager';
 import DashboardHome from './DashboardHome';
-import TodoApp from './TodoApp'; // Import the new TodoApp component
+import TodoApp from './TodoApp';
 import './AdminDashboard.css';
 
 const AdminDashboard = () => {
@@ -70,7 +70,7 @@ const AdminDashboard = () => {
         {section === 'home' && <DashboardHome />}
         {section === 'portfolio' && <PortfolioManager />}
         {section === 'blog' && <BlogManager />}
-        {section === 'todo' && <TodoApp />} {/* Add TodoApp component */}
+        {section === 'todo' && <TodoApp />} 
       </main>
     </div>
   );

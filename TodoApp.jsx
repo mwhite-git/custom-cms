@@ -1,28 +1,63 @@
-// src/pages/Admin/TodoApp.jsx
-import React, { useState } from 'react';
-import './TodoApp.css'; // Create a corresponding CSS file for styling
+import React, { useState, useEffect } from 'react';
+import { db, auth } from '../../firebaseConfig';
+import { collection, addDoc, getDocs, updateDoc, deleteDoc, doc } from 'firebase/firestore';
+import './TodoApp.css';
 
 const TodoApp = () => {
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState('');
+  const [priority, setPriority] = useState('medium');
 
-  const handleAddTask = () => {
-    if (newTask.trim()) {
-      setTasks([...tasks, { text: newTask, completed: false }]);
-      setNewTask('');
+  useEffect(() => {
+    const fetchTasks = async () => {
+      const tasksCollection = await getDocs(collection(db, 'tasks'));
+      const tasksData = tasksCollection.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      tasksData.sort((a, b) => priorityToValue(a.priority) - priorityToValue(b.priority));
+      setTasks(tasksData);
+    };
+    fetchTasks();
+  }, []);
+
+  const priorityToValue = (priority) => {
+    switch (priority) {
+      case 'high':
+        return 1;
+      case 'medium':
+        return 2;
+      case 'low':
+        return 3;
+      default:
+        return 4;
     }
   };
 
-  const handleToggleTask = index => {
-    const updatedTasks = tasks.map((task, i) =>
-      i === index ? { ...task, completed: !task.completed } : task
-    );
-    setTasks(updatedTasks);
+  const handleAddTask = async () => {
+    if (newTask.trim()) {
+      try {
+        const user = auth.currentUser;
+        if (user) {
+          const docRef = await addDoc(collection(db, 'tasks'), { text: newTask, completed: false, priority, userId: user.uid });
+          const newTaskData = { id: docRef.id, text: newTask, completed: false, priority, userId: user.uid };
+          setTasks([...tasks, newTaskData].sort((a, b) => priorityToValue(a.priority) - priorityToValue(b.priority)));
+          setNewTask('');
+          setPriority('medium');
+        }
+      } catch (error) {
+        console.error('Error adding task:', error);
+      }
+    }
   };
 
-  const handleDeleteTask = index => {
-    const updatedTasks = tasks.filter((_, i) => i !== index);
-    setTasks(updatedTasks);
+  const handleToggleTask = async (taskId, currentStatus) => {
+    const taskDoc = doc(db, 'tasks', taskId);
+    await updateDoc(taskDoc, { completed: !currentStatus });
+    setTasks(tasks.map(task => (task.id === taskId ? { ...task, completed: !task.completed } : task)));
+  };
+
+  const handleDeleteTask = async (taskId) => {
+    const taskDoc = doc(db, 'tasks', taskId);
+    await deleteDoc(taskDoc);
+    setTasks(tasks.filter(task => task.id !== taskId));
   };
 
   return (
@@ -35,13 +70,22 @@ const TodoApp = () => {
           onChange={e => setNewTask(e.target.value)}
           placeholder="Add a new task"
         />
+        <select value={priority} onChange={e => setPriority(e.target.value)}>
+          <option value="high">High</option>
+          <option value="medium">Medium</option>
+          <option value="low">Low</option>
+        </select>
         <button onClick={handleAddTask}>Add Task</button>
       </div>
       <ul className="todo-list">
-        {tasks.map((task, index) => (
-          <li key={index} className={task.completed ? 'completed' : ''}>
-            <span onClick={() => handleToggleTask(index)}>{task.text}</span>
-            <button onClick={() => handleDeleteTask(index)}>Delete</button>
+        {tasks.map(task => (
+          <li key={task.id} className={task.completed ? 'completed' : ''}>
+            <span className="task-text" onClick={() => handleToggleTask(task.id, task.completed)}>{task.text}</span>
+            <div className="task-controls">
+              <span className="priority">{task.priority}</span>
+              <button onClick={() => handleToggleTask(task.id, task.completed)}>{task.completed ? 'Undo' : 'Complete'}</button>
+              <button onClick={() => handleDeleteTask(task.id)}>Delete</button>
+            </div>
           </li>
         ))}
       </ul>

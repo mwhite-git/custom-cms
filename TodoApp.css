@@ -11,8 +11,15 @@
   }
   
   .todo-input input {
+    flex: 2;
+    padding: 10px;
+    font-size: 16px;
+  }
+  
+  .todo-input select {
     flex: 1;
     padding: 10px;
+    margin-left: 10px;
     font-size: 16px;
   }
   
@@ -30,11 +37,12 @@
   .todo-list li {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 10px 0;
     border-bottom: 1px solid #ccc;
   }
   
-  .todo-list li.completed span {
+  .todo-list li.completed span.task-text {
     text-decoration: line-through;
     color: gray;
   }
@@ -42,7 +50,32 @@
   .todo-list button {
     background: none;
     border: none;
-    color: red;
+    color: blue;
     cursor: pointer;
+  }
+  
+  .todo-list button:hover {
+    text-decoration: underline;
+  }
+  
+  .todo-list .priority {
+    margin-left: 10px;
+    font-weight: bold;
+  }
+  
+  .todo-list li.completed .priority {
+    color: gray;
+  }
+  
+  .todo-list .task-text {
+    flex-grow: 1;
+    text-align: left;
+  }
+  
+  .todo-list .task-controls {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
   }
   
