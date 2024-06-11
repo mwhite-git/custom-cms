@@ -2,11 +2,12 @@
 import React, { useState, useEffect } from 'react';
 import { auth } from '../../firebaseConfig';
 import { signOut } from 'firebase/auth';
-import { FaProjectDiagram, FaBlog, FaSignOutAlt, FaHome, FaTasks } from 'react-icons/fa';
+import { FaProjectDiagram, FaBlog, FaSignOutAlt, FaHome, FaTasks, FaUser } from 'react-icons/fa';
 import PortfolioManager from './PortfolioManager';
 import BlogManager from './BlogManager';
 import DashboardHome from './DashboardHome';
 import TodoApp from './TodoApp';
+import UserProfile from './UserProfile';
 import './AdminDashboard.css';
 
 const AdminDashboard = () => {
@@ -59,6 +60,12 @@ const AdminDashboard = () => {
             </button>
           </li>
           <li>
+            <button onClick={() => setSection('profile')} className="flex items-center space-x-2 text-gray-800 dark:text-gray-200 hover:text-blue-500">
+              <FaUser />
+              <span>Profile</span>
+            </button>
+          </li>
+          <li>
             <button onClick={handleLogout} className="flex items-center space-x-2 text-gray-800 dark:text-gray-200 hover:text-blue-500">
               <FaSignOutAlt />
               <span>Logout</span>
@@ -71,6 +78,7 @@ const AdminDashboard = () => {
         {section === 'portfolio' && <PortfolioManager />}
         {section === 'blog' && <BlogManager />}
         {section === 'todo' && <TodoApp />} 
+        {section === 'profile' && <UserProfile />}
       </main>
     </div>
   );

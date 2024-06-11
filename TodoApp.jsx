@@ -63,7 +63,7 @@ const TodoApp = () => {
   return (
     <div className="todo-app">
       <h1>To-Do List</h1>
-      <div className="todo-input">
+      <div className="todo-input text-gray-700">
         <input
           type="text"
           value={newTask}

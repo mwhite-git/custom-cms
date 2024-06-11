@@ -8,7 +8,6 @@ import './BlogManager.css';
 const BlogManager = () => {
   const [title, setTitle] = useState('');
   const [editorContent, setEditorContent] = useState('');
-  const [author, setAuthor] = useState('');
   const [categories, setCategories] = useState('');
   const [publishDate, setPublishDate] = useState('');
   const [blogEntries, setBlogEntries] = useState([]);
@@ -17,11 +16,17 @@ const BlogManager = () => {
   const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
-    onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      if (currentUser) {
+        setUser(currentUser);
+      } else {
+        setUser(null);
+      }
     });
 
     fetchBlogEntries();
+
+    return () => unsubscribe();
   }, []);
 
   const fetchBlogEntries = async () => {
@@ -37,7 +42,7 @@ const BlogManager = () => {
     const entryData = {
       title: title || '',
       content: editorContent || '',
-      author: author || '',
+      authorId: user.uid,
       categories: categories ? categories.split(',').map(cat => cat.trim()) : [],
       publishDate: publishDate || '',
     };
@@ -57,7 +62,6 @@ const BlogManager = () => {
   const resetForm = () => {
     setTitle('');
     setEditorContent('');
-    setAuthor('');
     setCategories('');
     setPublishDate('');
   };
@@ -65,7 +69,6 @@ const BlogManager = () => {
   const handleEdit = (entry) => {
     setTitle(entry.title);
     setEditorContent(entry.content);
-    setAuthor(entry.author);
     setCategories(entry.categories.join(', '));
     setPublishDate(entry.publishDate);
     setEditingEntry(entry);
@@ -110,10 +113,6 @@ const BlogManager = () => {
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Author</label>
-          <input type="text" value={author} onChange={(e) => setAuthor(e.target.value)} className="mt-1 block w-full px-3 py-2 text-gray-900 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" />
-        </div>
-        <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Categories (comma separated)</label>
           <input type="text" value={categories} onChange={(e) => setCategories(e.target.value)} className="mt-1 block w-full px-3 py-2 text-gray-900 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" />
         </div>
@@ -142,7 +141,7 @@ const BlogManager = () => {
           <li key={entry.id} className="mb-4 p-4 border border-gray-300 rounded-md">
             <h3 className="text-xl font-bold">{entry.title}</h3>
             <div dangerouslySetInnerHTML={{ __html: entry.content }}></div>
-            <p className="mt-2"><strong>Author:</strong> {entry.author}</p>
+            <p className="mt-2"><strong>Author ID:</strong> {entry.authorId}</p>
             <p className="mt-2"><strong>Categories:</strong> {entry.categories.join(', ')}</p>
             <p className="mt-2"><strong>Publish Date:</strong> {entry.publishDate}</p>
             {user && (

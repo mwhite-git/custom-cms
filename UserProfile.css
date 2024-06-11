@@ -1,0 +1,33 @@
+/* src/pages/Admin/UserProfile.css */
+.user-profile {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .profile-section {
+    margin-bottom: 20px;
+  }
+  
+  .profile-section label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .profile-section input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .profile-section button {
+    padding: 10px 20px;
+    font-size: 16px;
+  }
+  
+  .profile-image {
+    max-width: 100px;
+    border-radius: 50%;
+    margin-top: 10px;
+  }
+  
